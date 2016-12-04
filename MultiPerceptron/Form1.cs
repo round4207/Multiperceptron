@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Diagnostics;
 
 namespace MultiPerceptron
 {
@@ -174,6 +175,8 @@ namespace MultiPerceptron
                 trainingGroupList.Add(new TrainingGroup(rowsToCopy, topology, learningRate, 0.35, iterationField.Value, double.Parse(biasField.Text), double.Parse(biasWeightField.Text))); 
             }
 
+            Stopwatch sw = Stopwatch.StartNew();
+
             //now the real fun begins
             List<Thread> threadList = new List<Thread>();
             for (int i = 0; i < trainingGroupList.Count; i++)
@@ -202,6 +205,18 @@ namespace MultiPerceptron
             //add to it the rest of the groups' DeltaSums
 
             //now we can call finalWeights.ValidateForwardProp(List<double> testRow) for every test row! 
+
+            //output construction
+            string output = "";
+            output += "Time: " + sw.Elapsed + "\n";
+            output += "Expected\t\tActual\t\tCorrect?\n";
+            foreach (List<double> testRow in testList)
+            {
+                double expected = testRow[testRow.Count - 1];
+                double actual = finalWeights.ValidateForwardProp(testRow);
+                output += expected + "\t\t" + actual + "\t\t" + (expected == actual ? true : false) + "\n";
+            }
+            Console.WriteLine(output);
         }
 
         

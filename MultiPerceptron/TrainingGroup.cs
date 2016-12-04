@@ -377,7 +377,6 @@ namespace MultiPerceptron
             }
         }
 
-        //TODO SHOULD RETURN SOMETHING
         public double ValidateForwardProp(List<double> testRow)
         {
             //List<List<double>> trainingList = new List<List<double>>();

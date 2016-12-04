@@ -33,6 +33,7 @@ namespace MultiPerceptron
             biasWeightField.Text = "0.35";
             topologyField.Text = "3";
             learningField.Text = "0.35";
+            defaultWeightField.Text = "0.35";
         }
 
         private void ResetOutput(Node node)
@@ -142,7 +143,7 @@ namespace MultiPerceptron
         {
             List<TrainingGroup> trainingGroupList = new List<TrainingGroup>();
 
-            double defaultWeightValue = 0.35;
+            double defaultWeightValue = double.Parse(defaultWeightField.Text);
             //check if training and test data have equal column numbers
             if (trainingList[0].Count != testList[0].Count)
             {

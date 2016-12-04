@@ -192,17 +192,16 @@ namespace MultiPerceptron
             //trainingGroupList[0].DeltasToSumDeltas;
             for (int i = 1; i < trainingGroupList.Count; i++)
 			{
-                List<double> 			    
+                trainingGroupList[i].AddDeltasFrom(trainingGroupList[i - 1]);		    
 			}
-            trainingGroupList[trainingGroupList.Count - 1].DeltasToSumDeltas();
+
+            TrainingGroup finalWeights = trainingGroupList[trainingGroupList.Count - 1];
+
+            finalWeights.DeltasToSumDeltas();
+
             //add to it the rest of the groups' DeltaSums
 
-            foreach (TrainingGroup trainingGroup in trainingGroupList)
-            {
-                List<List<Node>> layerCopy = trainingGroup.GetLayers();
-                trainingGroup.ProcessOutput(layerCopy[layerCopy.Count - 2], layerCopy[layerCopy.Count - 1][0]);
-                Console.WriteLine(layerCopy[layerCopy.Count - 1][0].GetOutput());
-            }
+            //now we can call finalWeights.ValidateForwardProp(List<double> testRow) for every test row! 
         }
 
         

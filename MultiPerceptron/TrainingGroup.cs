@@ -330,6 +330,23 @@ namespace MultiPerceptron
             nodeToProcess.SetWeights(newWeights);
         }
 
+        public void ResetWeights(Node nodeToProcess)
+        {
+            List<double> newWeights = new List<double>();
+            for (int i = 0; i < nodeToProcess.GetWeights().Count; i++)
+            {
+                //origWeight - (learningRate * delta)
+                //Console.WriteLine("Index: " + i);
+                //Console.WriteLine("Old Weight: " + nodeToProcess.GetWeights()[i]);
+                //Console.WriteLine("Gradient: " + nodeToProcess.GetGradient());
+                //Console.WriteLine("Weights: " + nodeToProcess.GetWeights().Count + " || Deltas: " + nodeToProcess.GetDeltas().Count);
+                //Console.WriteLine("Delta: " + nodeToProcess.GetDeltas()[i]);
+                newWeights.Add(defaultWeightValue);
+                //Console.WriteLine(newWeights[newWeights.Count - 1]);
+            }
+            nodeToProcess.SetWeights(newWeights);
+        }
+
         public List<List<Node>> GetLayers()
         {
             return layers;
@@ -342,9 +359,87 @@ namespace MultiPerceptron
                 foreach (Node node in nodes)
                 {
                     node.OverrideDeltasWithSums();
+                    ResetWeights(node);
                     SetNewWeights(node);
                 }
             }
+        }
+
+        public void AddDeltasFrom(TrainingGroup alienGroup)
+        {
+            List<List<Node>> alienLayers = alienGroup.GetLayers();
+            for (int i = 1; i < alienLayers.Count; i++)
+            {
+                for (int j = 0; j < alienLayers[i].Count; j++)
+                {
+                    layers[i][j].SetDeltas(alienLayers[i][j].GetDeltaSums());
+                }
+            }
+        }
+
+        //TODO SHOULD RETURN SOMETHING
+        private double ValidateForwardProp(List<double> testRow)
+        {
+            //List<List<double>> trainingList = new List<List<double>>();
+            //if (!validation)
+            //{
+            //    trainingList = this.trainingList;
+            //}
+            //else
+            //{
+            //    trainingList = this.testList;
+            //}
+            double expectedRowOutput = testRow[testRow.Count - 1];
+
+            //INPUT LAYER
+            //layers.Add(new List<Node>());
+            //intialize input values
+            for (int i = 0; i < testRow.Count - 1; i++)
+            {
+                //layers[0].Add(new Node(trainingList[0][i], new List<double>()));
+                layers[0][i].SetOutput(testRow[i]);
+            }
+
+            //HIDDEN LAYER
+            for (int i = 0; i < topology.Count; i++)
+            {
+                //setting up number of Nodes per hidden layer
+                //int currentLayer = layers.Count + 1;
+                //layers.Add(new List<Node>()); //1
+                for (int j = 0; j < topology[i]; j++) //0
+                {
+                    //setting up each Node
+                    //List<double> weights = new List<double>();
+                    //for (int a = 0; a < layers[i].Count; a++) //has 6 nodes already
+                    //{
+                    //    weights.Add(defaultWeightValue);
+                    //}
+                    //layers[i + 1].Add(new Node(0, weights));
+                    //int lastNodeIndex = layers[i + 1].Count - 1;
+                    //layers[i + 1][j].SetWeights(weights);
+                    layers[i + 1][j].SetOutput(ProcessOutput(layers[i], layers[i + 1][j]));
+                }
+            }
+
+            //OUTPUT LAYER
+            //layers.Add(new List<Node>());
+            //List<double> outputWeights = new List<double>();
+            int outputLayerIndex = layers.Count - 1;
+            //for (int a = 0; a <= layers[outputLayerIndex - 1].Count; a++)
+            //{
+            //    outputWeights.Add(defaultWeightValue);
+            //}
+            //layers[outputLayerIndex].Add(new Node(0, outputWeights));
+            Node outputNode = layers[outputLayerIndex][0];
+            outputNode.SetOutput(ProcessOutput(layers[outputLayerIndex - 1], outputNode));
+
+            //git error
+            //0.5*((expected - actual)^2)
+            //error = GetError(outputNode.GetOutput(), expectedRowOutput);
+
+            //PrintInfo();
+
+            return outputNode.GetOutput();
         }
     }
 }

@@ -1,0 +1,9 @@
+c:\users\fauxtin\documents\visual studio 2012\Projects\MultiPerceptron\MultiPerceptron\bin\Debug\MultiPerceptron.exe.config
+c:\users\fauxtin\documents\visual studio 2012\Projects\MultiPerceptron\MultiPerceptron\bin\Debug\MultiPerceptron.exe
+c:\users\fauxtin\documents\visual studio 2012\Projects\MultiPerceptron\MultiPerceptron\bin\Debug\MultiPerceptron.pdb
+c:\users\fauxtin\documents\visual studio 2012\Projects\MultiPerceptron\MultiPerceptron\obj\Debug\MultiPerceptron.csprojResolveAssemblyReference.cache
+c:\users\fauxtin\documents\visual studio 2012\Projects\MultiPerceptron\MultiPerceptron\obj\Debug\MultiPerceptron.Form1.resources
+c:\users\fauxtin\documents\visual studio 2012\Projects\MultiPerceptron\MultiPerceptron\obj\Debug\MultiPerceptron.Properties.Resources.resources
+c:\users\fauxtin\documents\visual studio 2012\Projects\MultiPerceptron\MultiPerceptron\obj\Debug\MultiPerceptron.csproj.GenerateResource.Cache
+c:\users\fauxtin\documents\visual studio 2012\Projects\MultiPerceptron\MultiPerceptron\obj\Debug\MultiPerceptron.exe
+c:\users\fauxtin\documents\visual studio 2012\Projects\MultiPerceptron\MultiPerceptron\obj\Debug\MultiPerceptron.pdb

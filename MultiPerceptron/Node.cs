@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace MultiPerceptron
 {
@@ -68,7 +69,7 @@ namespace MultiPerceptron
             deltas = newDeltas;
             if (deltaSums.Count != deltas.Count)
             {
-                Console.WriteLine("DELTA SUMS WERE CLEARED!!!");
+                Console.WriteLine("DELTA SUMS WERE CLEARED!!!" + Thread.CurrentThread.Name);
                 deltaSums.Clear();
                 for (int i = 0; i < deltas.Count; i++)
                 {

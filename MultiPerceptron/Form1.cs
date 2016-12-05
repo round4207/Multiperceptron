@@ -152,7 +152,6 @@ namespace MultiPerceptron
             }
 
             topology = ValidateTopologyField(topologyField.Text);
-
             if (topology.Count == 0)
             {
                 MessageBox.Show("Error! Something wrong with topology input.\nPlease remove spaces and decimal points.");

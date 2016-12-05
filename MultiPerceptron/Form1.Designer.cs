@@ -86,6 +86,11 @@
             // iterationField
             // 
             this.iterationField.Location = new System.Drawing.Point(109, 249);
+            this.iterationField.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.iterationField.Minimum = new decimal(new int[] {
             1,
             0,
